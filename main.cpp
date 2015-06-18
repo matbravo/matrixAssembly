@@ -28,7 +28,7 @@ using std::cerr;
 using std::cout;
 using std::endl;
 
-void matrixEnsamble( GO ielement, std::vector< std::vector<int> >  &nodes, std::vector<int> &indices, std::vector<int> &degrees,float matrix[4][4],RCP<crs_matrix_type> &sparseMatrix){
+void matrixAssembly( GO ielement, std::vector< std::vector<int> >  &nodes, std::vector<int> &indices, std::vector<int> &degrees,float matrix[4][4],RCP<crs_matrix_type> &sparseMatrix){
 	/*
 		Algorithm try to insert the element (matrix_i,matrix_j) from local matrix 
 		to (sparse_i,sparse_j) in the sparse matrix
@@ -118,7 +118,7 @@ int main(int argc, char *argv[] ){
 	const size_t numMyElements = elementMap->getNodeNumElements ();
 	for ( LO k = 0; k < static_cast<LO>(numMyElements); k++){
 		GO element = elementMap->getGlobalElement(k);
-		matrixEnsamble(element,nodes,indices,degrees,matrices[element],sparseMatrix);
+		matrixAssembly(element,nodes,indices,degrees,matrices[element],sparseMatrix);
 	}
 	sparseMatrix->fillComplete();
 	//cout << "My rank : " << myRank << " MyElements : " << numMyElements << endl;
